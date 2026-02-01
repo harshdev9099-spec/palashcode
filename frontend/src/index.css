@@ -1,0 +1,185 @@
+/* Import Google Fonts - MUST be first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Palash Academy Design System - shadcn/ui compatible */
+@layer base {
+  :root {
+    /* Light Mode Theme - Royal Blue */
+    --background: 0 0% 100%;             /* Pure white #FFFFFF */
+    --foreground: 220 25% 27%;           /* Dark blue-slate #3A4454 */
+
+    --card: 0 0% 100%;                   /* White cards */
+    --card-foreground: 220 25% 27%;      /* Dark blue-slate text */
+
+    --popover: 0 0% 100%;                /* White popovers */
+    --popover-foreground: 220 25% 27%;   /* Dark blue-slate text */
+
+    --primary: 210 80% 60%;              /* Vibrant blue #3B82F6 */
+    --primary-foreground: 0 0% 100%;     /* White text */
+
+    --secondary: 210 100% 95%;           /* Very light blue #EBF5FF */
+    --secondary-foreground: 220 25% 27%; /* Dark text */
+
+    --accent: 220 90% 56%;               /* Royal blue #3B5CF6 */
+    --accent-foreground: 0 0% 100%;      /* White text */
+
+    --muted: 220 20% 96%;                /* Light blue-gray #F5F7FA */
+    --muted-foreground: 220 16% 47%;     /* Medium gray #6B7888 */
+
+    --destructive: 0 84% 60%;            /* Error red #E53935 */
+    --destructive-foreground: 0 0% 100%; /* White text */
+
+    --border: 220 20% 88%;               /* Light border #DDE3E7 */
+    --input: 220 20% 88%;                /* Input border */
+    --ring: 210 80% 60%;                 /* Focus ring - Vibrant blue */
+
+    --radius: 0.5rem;                    /* Border radius */
+  }
+
+  .dark {
+    /* Dark Mode Theme - Deep Blue */
+    --background: 220 28% 12%;           /* Deep blue-slate #181F26 */
+    --foreground: 210 30% 90%;           /* Light blue-gray #DDE5EC */
+
+    --card: 220 25% 17%;                 /* Elevated blue-slate #252D35 */
+    --card-foreground: 210 30% 90%;      /* Light blue-gray */
+
+    --popover: 220 25% 17%;              /* Elevated blue-slate */
+    --popover-foreground: 210 30% 90%;   /* Light blue-gray */
+
+    --primary: 210 85% 65%;              /* Bright blue #60A5FA */
+    --primary-foreground: 0 0% 100%;     /* White text */
+
+    --secondary: 210 40% 30%;            /* Dark blue #2D4A69 */
+    --secondary-foreground: 210 30% 90%; /* Light text */
+
+    --accent: 220 90% 60%;               /* Vibrant royal blue #5B7AF6 */
+    --accent-foreground: 0 0% 100%;      /* White text */
+
+    --muted: 220 20% 20%;                /* Dark muted #2A3039 */
+    --muted-foreground: 220 15% 65%;     /* Light gray #9BA3AD */
+
+    --destructive: 0 84% 60%;            /* Error red #E53935 */
+    --destructive-foreground: 0 0% 100%; /* White text */
+
+    --border: 220 20% 24%;               /* Dark border #333B44 */
+    --input: 220 20% 24%;                /* Input border */
+    --ring: 210 85% 65%;                 /* Focus ring - bright blue */
+  }
+
+  * {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+}
+
+/* Palash Academy Theme Utilities */
+@layer utilities {
+  .gradient-text {
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .gradient-autumn {
+    background-image: linear-gradient(to bottom right, hsl(var(--secondary)), hsl(var(--accent)));
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px hsl(var(--primary) / 0.2),
+                0 10px 10px -5px hsl(var(--primary) / 0.1);
+  }
+}
+
+/* IELTS Band Score Badges */
+@layer components {
+  .band-score {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: all 300ms;
+  }
+
+  .band-score:hover {
+    transform: scale(1.05);
+  }
+
+  .band-9 {
+    background-image: linear-gradient(to right, #4caf50, #43a047);
+    color: white;
+  }
+
+  .band-7-8 {
+    background-image: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+    color: white;
+  }
+
+  .band-5-6 {
+    background-image: linear-gradient(to right, hsl(var(--accent)), hsl(var(--primary)));
+    color: white;
+  }
+}
+
+/* Animated Gradient Background */
+.bg-gradient-animated {
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Feature Cards Animation */
+.feature-card {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
