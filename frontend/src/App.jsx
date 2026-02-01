@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,6 +18,7 @@ import EmailVerificationNoticePage from './pages/EmailVerificationNoticePage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
 import DashboardPage from './pages/DashboardPage';
 import ContactPage from './pages/ContactPage';
+import GoogleCallbackPage from './pages/GoogleCallbackPage';
 
 // Admin Components & Pages
 import AdminLayout from './components/admin/AdminLayout';
@@ -26,66 +27,78 @@ import UsersPage from './pages/admin/UsersPage';
 import ContactsPage from './pages/admin/ContactsPage';
 import ContactDetailPage from './pages/admin/ContactDetailPage';
 
+function AppLayout() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
+
+  return (
+    <>
+      <div className="flex flex-col min-h-screen">
+        {!isAdminRoute && <Header />}
+
+        <main className="flex-grow">
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/email/verification-notice" element={<EmailVerificationNoticePage />} />
+            <Route path="/email/verify/:id/:hash" element={<VerifyEmailPage />} />
+            <Route path="/auth/google/callback" element={<GoogleCallbackPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+
+            {/* Protected Routes */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<DashboardPage />} />
+            </Route>
+
+            {/* Admin Routes */}
+            <Route element={<AdminRoute />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route path="dashboard" element={<AdminDashboardPage />} />
+                <Route path="users" element={<UsersPage />} />
+                <Route path="contacts" element={<ContactsPage />} />
+                <Route path="contacts/:id" element={<ContactDetailPage />} />
+              </Route>
+            </Route>
+
+            {/* 404 Not Found */}
+            <Route path="*" element={
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                  <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
+                  <p className="text-xl text-gray-600">Page not found</p>
+                </div>
+              </div>
+            } />
+          </Routes>
+        </main>
+
+        {!isAdminRoute && <Footer />}
+      </div>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </>
+  );
+}
+
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-
-          <main className="flex-grow">
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-              <Route path="/reset-password" element={<ResetPasswordPage />} />
-              <Route path="/email/verification-notice" element={<EmailVerificationNoticePage />} />
-              <Route path="/email/verify/:id/:hash" element={<VerifyEmailPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-
-              {/* Protected Routes */}
-              <Route element={<PrivateRoute />}>
-                <Route path="/dashboard" element={<DashboardPage />} />
-              </Route>
-
-              {/* Admin Routes */}
-              <Route element={<AdminRoute />}>
-                <Route path="/admin" element={<AdminLayout />}>
-                  <Route path="dashboard" element={<AdminDashboardPage />} />
-                  <Route path="users" element={<UsersPage />} />
-                  <Route path="contacts" element={<ContactsPage />} />
-                  <Route path="contacts/:id" element={<ContactDetailPage />} />
-                </Route>
-              </Route>
-
-              {/* 404 Not Found */}
-              <Route path="*" element={
-                <div className="min-h-screen flex items-center justify-center">
-                  <div className="text-center">
-                    <h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
-                    <p className="text-xl text-gray-600">Page not found</p>
-                  </div>
-                </div>
-              } />
-            </Routes>
-          </main>
-
-          <Footer />
-        </div>
-
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
+        <AppLayout />
       </Router>
     </AuthProvider>
   );

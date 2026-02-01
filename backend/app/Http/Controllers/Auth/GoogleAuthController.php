@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class GoogleAuthController extends Controller
 {
@@ -18,7 +19,7 @@ class GoogleAuthController extends Controller
      */
     public function redirect()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     /**
@@ -29,7 +30,7 @@ class GoogleAuthController extends Controller
     public function callback()
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')->stateless()->user();
 
             // Find or create user
             $user = User::where('google_id', $googleUser->getId())
@@ -67,6 +68,10 @@ class GoogleAuthController extends Controller
             return redirect()->away("{$frontendUrl}/auth/google/callback?token={$token}");
 
         } catch (\Exception $e) {
+            Log::error('Google OAuth callback failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             $frontendUrl = config('app.frontend_url', 'http://localhost:3000');
             return redirect()->away("{$frontendUrl}/login?error=google_auth_failed");
         }

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan migrate:*)",
+      "Bash(php artisan migrate:fresh:*)",
+      "Bash(npx create-react-app frontend)",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss init -p)",
+      "Bash(node node_modules/tailwindcss/lib/cli.js:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(composer install:*)",
+      "Bash(php artisan:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(copy:*)"
+    ]
+  }
+}

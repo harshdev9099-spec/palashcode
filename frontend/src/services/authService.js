@@ -111,6 +111,35 @@ const authService = {
   },
 
   /**
+   * Handle Google OAuth callback - stores token and fetches user data
+   */
+  handleGoogleCallback: async (token) => {
+    try {
+      // Store the token
+      localStorage.setItem('auth_token', token);
+
+      // Fetch user data using the token
+      const user = await authService.getCurrentUser();
+      if (user) {
+        return { success: true, user };
+      }
+      throw new Error('Failed to fetch user data');
+    } catch (error) {
+      // Clear token if user fetch fails
+      localStorage.removeItem('auth_token');
+      throw error;
+    }
+  },
+
+  /**
+   * Get Google OAuth redirect URL
+   */
+  getGoogleAuthUrl: () => {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+    return `${apiUrl}/auth/google/redirect`;
+  },
+
+  /**
    * Check if user is authenticated
    */
   isAuthenticated: () => {

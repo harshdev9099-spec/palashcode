@@ -84,6 +84,21 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(userData));
   };
 
+  const loginWithGoogle = async (token) => {
+    try {
+      const result = await authService.handleGoogleCallback(token);
+      if (result.success && result.user) {
+        setUser(result.user);
+        setIsAuthenticated(true);
+        setIsAdmin(result.user?.role === 'admin');
+        return result;
+      }
+      throw new Error('Google login failed');
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const value = {
     user,
     isAuthenticated,
@@ -93,6 +108,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateUser,
+    loginWithGoogle,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
