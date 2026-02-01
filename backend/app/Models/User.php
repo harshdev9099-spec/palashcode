@@ -80,4 +80,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Contact::class);
     }
+
+    public function listeningAttempts()
+    {
+        return $this->hasMany(ListeningAttempt::class);
+    }
 }
