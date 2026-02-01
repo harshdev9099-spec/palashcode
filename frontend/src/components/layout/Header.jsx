@@ -54,6 +54,18 @@ const Header = () => {
                 >
                   Dashboard
                 </Link>
+                <Link
+                  to="/listening-tests"
+                  className="text-earth-700 hover:text-secondary-600 hover:bg-primary-50 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                >
+                  Listening Tests
+                </Link>
+                <Link
+                  to="/my-attempts"
+                  className="text-earth-700 hover:text-secondary-600 hover:bg-primary-50 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                >
+                  My Attempts
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="bg-gradient-to-r from-secondary-500 to-accent-500 text-white hover:from-secondary-600 hover:to-accent-600 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"

@@ -26,6 +26,16 @@ import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import UsersPage from './pages/admin/UsersPage';
 import ContactsPage from './pages/admin/ContactsPage';
 import ContactDetailPage from './pages/admin/ContactDetailPage';
+import AdminListeningTestsPage from './pages/admin/ListeningTestsPage';
+import ListeningTestCreatePage from './pages/admin/ListeningTestCreatePage';
+import ListeningTestEditPage from './pages/admin/ListeningTestEditPage';
+import ListeningTestResultsPage from './pages/admin/ListeningTestResultsPage';
+
+// User Listening Pages
+import ListeningTestsPage from './pages/ListeningTestsPage';
+import ListeningTestTakePage from './pages/ListeningTestTakePage';
+import ListeningResultPage from './pages/ListeningResultPage';
+import MyAttemptsPage from './pages/MyAttemptsPage';
 
 function AppLayout() {
   const location = useLocation();
@@ -52,6 +62,10 @@ function AppLayout() {
             {/* Protected Routes */}
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/listening-tests" element={<ListeningTestsPage />} />
+              <Route path="/listening-tests/:id" element={<ListeningTestTakePage />} />
+              <Route path="/listening-tests/:id/result/:attemptId" element={<ListeningResultPage />} />
+              <Route path="/my-attempts" element={<MyAttemptsPage />} />
             </Route>
 
             {/* Admin Routes */}
@@ -61,6 +75,10 @@ function AppLayout() {
                 <Route path="users" element={<UsersPage />} />
                 <Route path="contacts" element={<ContactsPage />} />
                 <Route path="contacts/:id" element={<ContactDetailPage />} />
+                <Route path="listening-tests" element={<AdminListeningTestsPage />} />
+                <Route path="listening-tests/create" element={<ListeningTestCreatePage />} />
+                <Route path="listening-tests/:id/edit" element={<ListeningTestEditPage />} />
+                <Route path="listening-tests/:id/results" element={<ListeningTestResultsPage />} />
               </Route>
             </Route>
 

@@ -15,6 +15,7 @@ const AdminLayout = () => {
     { name: 'Dashboard', href: '/admin/dashboard', icon: '📊' },
     { name: 'Users', href: '/admin/users', icon: '👥' },
     { name: 'Contacts', href: '/admin/contacts', icon: '📧' },
+    { name: 'Listening Tests', href: '/admin/listening-tests', icon: '🎧' },
   ];
 
   return (

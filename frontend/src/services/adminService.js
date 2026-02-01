@@ -84,6 +84,64 @@ const adminService = {
       throw error.response?.data || error;
     }
   },
+  // Listening Test Management
+  getListeningTests: async (params = {}) => {
+    try {
+      const response = await api.get('/admin/listening-tests', { params });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  createListeningTest: async (formData) => {
+    try {
+      const response = await api.post('/admin/listening-tests', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  getListeningTest: async (id) => {
+    try {
+      const response = await api.get(`/admin/listening-tests/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  updateListeningTest: async (id, formData) => {
+    try {
+      const response = await api.post(`/admin/listening-tests/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  deleteListeningTest: async (id) => {
+    try {
+      const response = await api.delete(`/admin/listening-tests/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  getListeningTestResults: async (id, params = {}) => {
+    try {
+      const response = await api.get(`/admin/listening-tests/${id}/results`, { params });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
 };
 
 export default adminService;
